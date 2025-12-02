@@ -1,0 +1,158 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+    <title>Faculty Attendance Management System</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <!-- Login Container -->
+    <div id="loginContainer" class="container active">
+        <div class="auth-container">
+            <div class="auth-box">
+                <div class="auth-header">
+                    <div class="auth-icon">👤</div>
+                    <h1 class="auth-title">Faculty Portal</h1>
+                    <p class="auth-subtitle">Attendance Management System</p>
+                </div>
+                <div id="errorMessage" class="error-message" style="display: none;"></div>
+                <div class="form-group">
+                    <label class="form-label">Email Address</label>
+                    <input type="email" id="loginEmail" class="form-input" placeholder="faculty@university.edu">
+                </div>
+                <div class="form-group">
+                    <label class="form-label">Password</label>
+                    <input type="password" id="loginPassword" class="form-input" placeholder="Enter your password">
+                </div>
+                <button class="btn btn-primary" onclick="handleLogin()">Login</button>
+                <div class="toggle-link">
+                    New user? <a href="#" onclick="showRegister(); return false;">Register here</a>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Register Container -->
+    <div id="registerContainer" class="container">
+        <div class="auth-container">
+            <div class="auth-box">
+                <div class="auth-header">
+                    <div class="auth-icon">✏️</div>
+                    <h1 class="auth-title">Register</h1>
+                    <p class="auth-subtitle">Create your faculty account</p>
+                </div>
+                <div id="registerErrorMessage" class="error-message" style="display: none;"></div>
+                <div class="form-group">
+                    <label class="form-label">Full Name</label>
+                    <input type="text" id="registerName" class="form-input" placeholder="Dr. John Doe">
+                </div>
+                <div class="form-group">
+                    <label class="form-label">Email Address</label>
+                    <input type="email" id="registerEmail" class="form-input" placeholder="faculty@university.edu">
+                </div>
+                <div class="form-group">
+                    <label class="form-label">Password</label>
+                    <input type="password" id="registerPassword" class="form-input" placeholder="Create a password">
+                </div>
+                <div class="form-group">
+                    <label class="form-label">Re-enter Password</label>
+                    <input type="password" id="registerConfirmPassword" class="form-input" placeholder="Confirm your password">
+                </div>
+                <button class="btn btn-primary" onclick="handleRegister()">Register</button>
+                <div class="toggle-link">
+                    Already have an account? <a href="#" onclick="showLogin(); return false;">Login here</a>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Dashboard Container -->
+    <div id="dashboardContainer" class="container">
+        <div class="dashboard-header">
+            <div class="user-info">
+                <div class="user-avatar">👤</div>
+                <div class="user-details">
+                    <h2 id="facultyName">Loading...</h2>
+                    <p>Faculty Dashboard</p>
+                </div>
+            </div>
+            <button class="btn btn-logout" onclick="handleLogout()">Logout</button>
+        </div>
+        <div class="content-header">
+            <h1>My Subjects</h1>
+            <p>Select a subject to view student attendance</p>
+        </div>
+        <div id="subjectsGrid" class="subjects-grid">
+            <div class="loading">Loading subjects...</div>
+        </div>
+    </div>
+
+    <!-- Students List Container -->
+    <div id="studentsContainer" class="container">
+        <div class="dashboard-header">
+            <div class="user-info">
+                <button class="back-btn" onclick="showDashboard()" style="color: #333;">← Back</button>
+                <div class="user-details">
+                    <h2 id="subjectName">Subject Name</h2>
+                    <p id="subjectCode">Subject Code</p>
+                </div>
+            </div>
+            <button class="btn btn-logout" onclick="handleLogout()">Logout</button>
+        </div>
+        <div class="content-header">
+            <h1>Student List</h1>
+            <p id="studentCount">Total Students: 0</p>
+        </div>
+        <div class="table-container">
+            <table>
+                <thead>
+                    <tr>
+                        <th>Roll No</th>
+                        <th>Student Name</th>
+                        <th style="text-align: center;">Attendance %</th>
+                        <th style="text-align: center;">Action</th>
+                    </tr>
+                </thead>
+                <tbody id="studentsTableBody">
+                    <tr><td colspan="4" class="loading">Loading students...</td></tr>
+                </tbody>
+            </table>
+        </div>
+    </div>
+
+    <!-- Student Details Container -->
+    <div id="detailsContainer" class="container">
+        <div class="dashboard-header">
+            <div class="user-info">
+                <button class="back-btn" onclick="showStudentsList()" style="color: #333;">← Back to Students</button>
+                <div class="user-details">
+                    <h2 id="studentDetailName">Student Name</h2>
+                    <p id="studentDetailRoll">Roll Number</p>
+                </div>
+            </div>
+            <button class="btn btn-logout" onclick="handleLogout()">Logout</button>
+        </div>
+        <div class="detail-card">
+            <div class="detail-header">
+                <div class="detail-info">
+                    <h1>Attendance Details</h1>
+                    <p id="detailSubjectInfo">Subject - Code</p>
+                </div>
+                <div class="attendance-percent">
+                    <div class="percent-value" id="detailPercent">0%</div>
+                    <p class="percent-label">Overall Attendance</p>
+                </div>
+            </div>
+        </div>
+        <div class="detail-card">
+            <h3 style="color: #333; margin-bottom: 20px;">Attendance Records</h3>
+            <div id="recordsList" class="records-list">
+                <div class="loading">Loading records...</div>
+            </div>
+        </div>
+    </div>
+
+    <script type="module" src="app.js"></script>
+</body>
+</html>
